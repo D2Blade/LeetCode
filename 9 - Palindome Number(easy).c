@@ -25,16 +25,20 @@ Constraints:
 */
 
 bool isPalindrome(int x) {
-    if(x<0){
+    if(x < 0)
         return false;
-    }
+    if (x == 0)
+        return true;
 
-    int reverso=0, original=x;
-
-    while (x!=0){
-        int resto=x%10;
-        reverso=reverso*10+resto;
-        x/=10;
+    int n = log10(x) + 1;
+    int ponteiro = n/2;
+    int l = (int) pow(10, n-1), r = 1;
+    while(ponteiro--) {
+        if ((x/l)%10!=(x/r)%10){
+            return false;
+        }
+        l /=10;
+        r *=10;
     }
-    return original==reverso;
+    return true;
 }
